@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -19,7 +20,6 @@ import com.aliasi.util.AbstractExternalizable;
 public class GeneAnnotator extends JCasAnnotator_ImplBase {
   
   public static final String PARAM_MODELFILE = "ModelFile";
-
   
   private Chunker chunker;
   
@@ -31,8 +31,8 @@ public class GeneAnnotator extends JCasAnnotator_ImplBase {
     
     if (!modelFile.exists()) {
 
-
     }
+    
     try {
       chunker = (Chunker) AbstractExternalizable.readObject(modelFile);
     } catch (IOException e) {
@@ -59,9 +59,19 @@ public class GeneAnnotator extends JCasAnnotator_ImplBase {
       for (Chunk chunk : chunking.chunkSet()) {
         Gene gene = new Gene(aJCas);
         gene.setId(id);
-        gene.setRawString(rawString.substring(chunk.start(), chunk.end()));
-        gene.setBegin(chunk.start());
-        gene.setEnd(chunk.end());
+
+        String geneRawString = rawString.substring(chunk.start(), chunk.end());
+        gene.setRawString(geneRawString);
+
+        int geneLocation = chunk.start();
+        // Start offset is the number of NON-whitespace characters in the sentence
+        // preceding the first character of the mention
+        int countWhitespaceBefore = StringUtils.countMatches(rawString.substring(0, geneLocation), " ");
+        // End offset is the number of NON-whitespace characters in the sentence
+        // preceding the last character of the mention
+        int countWhitespaceIn = StringUtils.countMatches(geneRawString, " ");
+        gene.setBegin(chunk.start() - countWhitespaceBefore);
+        gene.setEnd(chunk.end() - 1 - countWhitespaceBefore - countWhitespaceIn);
         gene.addToIndexes();
       }
     }

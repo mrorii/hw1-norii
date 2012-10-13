@@ -15,9 +15,9 @@ public class SentenceAnnotator extends JCasAnnotator_ImplBase {
     for (String line : lines) {
       Sentence annotation = new Sentence(aJCas);
       
-      int spaceIndex = line.indexOf(" ");
-      String id = line.substring(0, spaceIndex);
-      String string = line.substring(spaceIndex + 1);
+      int whiteSpaceIndex = line.indexOf(" ");
+      String id = line.substring(0, whiteSpaceIndex);
+      String string = line.substring(whiteSpaceIndex + 1);
       
       annotation.setId(id);
       annotation.setRawString(string);

@@ -109,6 +109,11 @@
     	<artifactId>lingpipe</artifactId>
     	<version>4.1.0</version>
     </dependency>
+    <dependency>
+    	<groupId>commons-lang</groupId>
+    	<artifactId>commons-lang</artifactId>
+    	<version>20030203.000129</version>
+    </dependency>
   </dependencies>
   <scm>
   	<connection>scm:git:git@github.com:mrorii/hw1-norii.git</connection>
