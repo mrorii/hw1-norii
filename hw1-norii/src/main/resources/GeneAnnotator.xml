@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>true</primitive>
+  <annotatorImplementationName>com.orii.uima.GeneAnnotator</annotatorImplementationName>
+  <analysisEngineMetaData>
+    <name>Gene Annotator</name>
+    <description>A simple annotator that annotates genes</description>
+    <version>1.0</version>
+    <vendor>Naoki Orii</vendor>
+    <configurationParameters>
+      <configurationParameter>
+        <name>ModelFile</name>
+        <description>Path to the model file</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>ModelFile</name>
+        <value>
+          <string>src/main/resources/model/ne-en-bio-genetag.HmmChunker</string>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription>
+      <imports>
+        <import location="TypeSystemDescriptor.xml"/>
+      </imports>
+    </typeSystemDescription>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs>
+          <type allAnnotatorFeatures="true">com.orii.uima.Sentence</type>
+        </inputs>
+        <outputs>
+          <type allAnnotatorFeatures="true">com.orii.uima.Gene</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+</analysisEngineDescription>
