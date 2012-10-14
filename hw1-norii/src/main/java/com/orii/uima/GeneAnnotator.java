@@ -51,14 +51,14 @@ public class GeneAnnotator extends JCasAnnotator_ImplBase {
     Iterator sentenceIter = sentenceIndex.iterator();
     while (sentenceIter.hasNext()) {
       Sentence sentence = (Sentence) sentenceIter.next();
-      String id = sentence.getId();
+      String id = sentence.getSentenceID();
       String rawString = sentence.getRawString();
       
       Chunking chunking = chunker.chunk(rawString);
       
       for (Chunk chunk : chunking.chunkSet()) {
         Gene gene = new Gene(aJCas);
-        gene.setId(id);
+        gene.setSentenceID(id);
 
         String geneRawString = rawString.substring(chunk.start(), chunk.end());
         gene.setRawString(geneRawString);
@@ -70,8 +70,13 @@ public class GeneAnnotator extends JCasAnnotator_ImplBase {
         // End offset is the number of NON-whitespace characters in the sentence
         // preceding the last character of the mention
         int countWhitespaceIn = StringUtils.countMatches(geneRawString, " ");
-        gene.setBegin(chunk.start() - countWhitespaceBefore);
-        gene.setEnd(chunk.end() - 1 - countWhitespaceBefore - countWhitespaceIn);
+        gene.setOffsetBegin(chunk.start() - countWhitespaceBefore);
+        gene.setOffsetEnd(chunk.end() - 1 - countWhitespaceBefore - countWhitespaceIn);
+        
+        // Ugly hack to get correct sort order
+        gene.setBegin(sentence.getBegin());
+        gene.setEnd(- chunk.end());
+        
         gene.addToIndexes();
       }
     }

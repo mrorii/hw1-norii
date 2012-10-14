@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Sat Oct 13 17:09:01 EDT 2012
+ * Updated by JCasGen Sat Oct 13 18:12:34 EDT 2012
  * XML source: /Users/orii/git/hw1-norii/hw1-norii/src/main/resources/TypeSystemDescriptor.xml
  * @generated */
 public class Sentence extends Annotation {
@@ -61,21 +61,21 @@ public class Sentence extends Annotation {
   private void readObject() {/*default - does nothing empty block */}
      
   //*--------------*
-  //* Feature: id
+  //* Feature: sentenceID
 
-  /** getter for id - gets ID of this sentence
+  /** getter for sentenceID - gets ID of this sentence
    * @generated */
-  public String getId() {
-    if (Sentence_Type.featOkTst && ((Sentence_Type)jcasType).casFeat_id == null)
-      jcasType.jcas.throwFeatMissing("id", "com.orii.uima.Sentence");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((Sentence_Type)jcasType).casFeatCode_id);}
+  public String getSentenceID() {
+    if (Sentence_Type.featOkTst && ((Sentence_Type)jcasType).casFeat_sentenceID == null)
+      jcasType.jcas.throwFeatMissing("sentenceID", "com.orii.uima.Sentence");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((Sentence_Type)jcasType).casFeatCode_sentenceID);}
     
-  /** setter for id - sets ID of this sentence 
+  /** setter for sentenceID - sets ID of this sentence 
    * @generated */
-  public void setId(String v) {
-    if (Sentence_Type.featOkTst && ((Sentence_Type)jcasType).casFeat_id == null)
-      jcasType.jcas.throwFeatMissing("id", "com.orii.uima.Sentence");
-    jcasType.ll_cas.ll_setStringValue(addr, ((Sentence_Type)jcasType).casFeatCode_id, v);}    
+  public void setSentenceID(String v) {
+    if (Sentence_Type.featOkTst && ((Sentence_Type)jcasType).casFeat_sentenceID == null)
+      jcasType.jcas.throwFeatMissing("sentenceID", "com.orii.uima.Sentence");
+    jcasType.ll_cas.ll_setStringValue(addr, ((Sentence_Type)jcasType).casFeatCode_sentenceID, v);}    
    
     
   //*--------------*

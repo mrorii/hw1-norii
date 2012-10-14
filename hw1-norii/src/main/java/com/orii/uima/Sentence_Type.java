@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Sat Oct 13 17:09:01 EDT 2012
+ * Updated by JCasGen Sat Oct 13 18:12:34 EDT 2012
  * @generated */
 public class Sentence_Type extends Annotation_Type {
   /** @generated */
@@ -47,20 +47,20 @@ public class Sentence_Type extends Annotation_Type {
 
 
   /** @generated */
-  final Feature casFeat_id;
+  final Feature casFeat_sentenceID;
   /** @generated */
-  final int     casFeatCode_id;
+  final int     casFeatCode_sentenceID;
   /** @generated */ 
-  public String getId(int addr) {
-        if (featOkTst && casFeat_id == null)
-      jcas.throwFeatMissing("id", "com.orii.uima.Sentence");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_id);
+  public String getSentenceID(int addr) {
+        if (featOkTst && casFeat_sentenceID == null)
+      jcas.throwFeatMissing("sentenceID", "com.orii.uima.Sentence");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_sentenceID);
   }
   /** @generated */    
-  public void setId(int addr, String v) {
-        if (featOkTst && casFeat_id == null)
-      jcas.throwFeatMissing("id", "com.orii.uima.Sentence");
-    ll_cas.ll_setStringValue(addr, casFeatCode_id, v);}
+  public void setSentenceID(int addr, String v) {
+        if (featOkTst && casFeat_sentenceID == null)
+      jcas.throwFeatMissing("sentenceID", "com.orii.uima.Sentence");
+    ll_cas.ll_setStringValue(addr, casFeatCode_sentenceID, v);}
     
   
  
@@ -91,8 +91,8 @@ public class Sentence_Type extends Annotation_Type {
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
  
-    casFeat_id = jcas.getRequiredFeatureDE(casType, "id", "uima.cas.String", featOkTst);
-    casFeatCode_id  = (null == casFeat_id) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_id).getCode();
+    casFeat_sentenceID = jcas.getRequiredFeatureDE(casType, "sentenceID", "uima.cas.String", featOkTst);
+    casFeatCode_sentenceID  = (null == casFeat_sentenceID) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_sentenceID).getCode();
 
  
     casFeat_rawString = jcas.getRequiredFeatureDE(casType, "rawString", "uima.cas.String", featOkTst);

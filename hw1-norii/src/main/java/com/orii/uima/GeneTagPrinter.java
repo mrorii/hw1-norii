@@ -112,13 +112,13 @@ public class GeneTagPrinter extends CasConsumer_ImplBase implements CasObjectPro
       throw new ResourceProcessException(e);
     }
 
-    boolean titleP = false;
-    String docUri = null;
-    Iterator it = jcas.getAnnotationIndex(SourceDocumentInformation.type).iterator();
-    if (it.hasNext()) {
-      SourceDocumentInformation srcDocInfo = (SourceDocumentInformation) it.next();
-      docUri = srcDocInfo.getUri();
-    }
+//    boolean titleP = false;
+//    String docUri = null;
+//    Iterator it = jcas.getAnnotationIndex(SourceDocumentInformation.type).iterator();
+//    if (it.hasNext()) {
+//      SourceDocumentInformation srcDocInfo = (SourceDocumentInformation) it.next();
+//      docUri = srcDocInfo.getUri();
+//    }
 
     FSIndex geneIndex = jcas.getAnnotationIndex(Gene.type);
     Iterator geneIter = geneIndex.iterator();
@@ -127,7 +127,7 @@ public class GeneTagPrinter extends CasConsumer_ImplBase implements CasObjectPro
       Gene gene = (Gene) geneIter.next();
       
       try {
-        fileWriter.write(gene.getId() + "|" + gene.getBegin() + " " + gene.getEnd() + "|" + gene.getRawString() + "\n");
+        fileWriter.write(gene.getSentenceID() + "|" + gene.getOffsetBegin() + " " + gene.getOffsetEnd() + "|" + gene.getRawString() + "\n");
         fileWriter.flush();
       } catch (IOException e) {
         throw new ResourceProcessException(e);

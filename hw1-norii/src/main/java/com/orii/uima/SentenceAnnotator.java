@@ -12,6 +12,7 @@ public class SentenceAnnotator extends JCasAnnotator_ImplBase {
     String docText = aJCas.getDocumentText();
     String[] lines = docText.split("\\r?\\n");
     
+    int counter = 0;
     for (String line : lines) {
       Sentence annotation = new Sentence(aJCas);
       
@@ -19,8 +20,13 @@ public class SentenceAnnotator extends JCasAnnotator_ImplBase {
       String id = line.substring(0, whiteSpaceIndex);
       String string = line.substring(whiteSpaceIndex + 1);
       
-      annotation.setId(id);
+      annotation.setSentenceID(id);
       annotation.setRawString(string);
+
+      // Ugly hack to keep track of order
+      annotation.setBegin(counter++);
+      annotation.setEnd(counter);
+      
       annotation.addToIndexes();
     }
   }
