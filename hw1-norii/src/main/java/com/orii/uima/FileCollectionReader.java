@@ -28,23 +28,30 @@ public class FileCollectionReader extends CollectionReader_ImplBase {
   public static final String PARAM_INPUTFILE = "InputFile";
   public static final String PARAM_ENCODING = "Encoding";
 
-  private ArrayList<File> mFiles;
+  private File mInputFile;
+  private String[] mLines;
   private String mEncoding;
 
   private int mCurrentIndex;
   
   public void initialize() throws ResourceInitializationException {
-    File inputFile = new File(((String) getConfigParameterValue(PARAM_INPUTFILE)).trim());
+    mInputFile = new File(((String) getConfigParameterValue(PARAM_INPUTFILE)).trim());
     mEncoding  = (String) getConfigParameterValue(PARAM_ENCODING);
 
     // if input file does not exist or is not a file, throw exception
-    if (!inputFile.exists() || !inputFile.isFile()) {
+    if (!mInputFile.exists() || !mInputFile.isFile()) {
       throw new ResourceInitializationException(ResourceConfigurationException.NONEXISTENT_PARAMETER,
-              new Object[] { PARAM_INPUTFILE, this.getMetaData().getName(), inputFile.getPath() });
+              new Object[] { PARAM_INPUTFILE, this.getMetaData().getName(), mInputFile.getPath() });
     }
     
-    mFiles = new ArrayList<File>();
-    mFiles.add(inputFile);
+    try {
+      String text = FileUtils.file2String(mInputFile, mEncoding);
+      mLines = text.split("\\r?\\n");
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
     mCurrentIndex = 0;
   }
   
@@ -58,11 +65,8 @@ public class FileCollectionReader extends CollectionReader_ImplBase {
       throw new CollectionException(e);
     }
     
-    // open input stream to file
-    File file = (File) mFiles.get(mCurrentIndex++);
-    String text = FileUtils.file2String(file, mEncoding);
-      // put document in CAS
-    jcas.setDocumentText(text);
+    String line = mLines[mCurrentIndex++];
+    jcas.setDocumentText(line);
     
     // Also store location of source document in CAS. This information is critical
     // if CAS Consumers will need to know where the original document contents are located.
@@ -70,10 +74,10 @@ public class FileCollectionReader extends CollectionReader_ImplBase {
     // search index that it creates, which allows applications that use the search index to
     // locate the documents that satisfy their semantic queries.
     SourceDocumentInformation srcDocInfo = new SourceDocumentInformation(jcas);
-    srcDocInfo.setUri(file.getAbsoluteFile().toURL().toString());
+    srcDocInfo.setUri(mInputFile.getAbsoluteFile().toURL().toString());
     srcDocInfo.setOffsetInSource(0);
-    srcDocInfo.setDocumentSize((int) file.length());
-    srcDocInfo.setLastSegment(mCurrentIndex == mFiles.size());
+    srcDocInfo.setDocumentSize((int) mInputFile.length());
+    srcDocInfo.setLastSegment(mCurrentIndex == mLines.length);
     srcDocInfo.addToIndexes();
   }
 
@@ -85,11 +89,11 @@ public class FileCollectionReader extends CollectionReader_ImplBase {
 
   @Override
   public Progress[] getProgress() {
-    return new Progress[] { new ProgressImpl(mCurrentIndex, mFiles.size(), Progress.ENTITIES) };
+    return new Progress[] { new ProgressImpl(mCurrentIndex, mLines.length, Progress.ENTITIES) };
   }
 
   @Override
   public boolean hasNext() throws IOException, CollectionException {
-    return mCurrentIndex < mFiles.size();
+    return mCurrentIndex < mLines.length;
   }
 }

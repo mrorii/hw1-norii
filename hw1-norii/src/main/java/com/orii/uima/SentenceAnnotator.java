@@ -9,26 +9,18 @@ public class SentenceAnnotator extends JCasAnnotator_ImplBase {
   @Override
   public void process(JCas aJCas) throws AnalysisEngineProcessException {
     // get document text
-    String docText = aJCas.getDocumentText();
-    String[] lines = docText.split("\\r?\\n");
+    String line = aJCas.getDocumentText();
     
-    int counter = 0;
-    for (String line : lines) {
-      Sentence annotation = new Sentence(aJCas);
+    Sentence annotation = new Sentence(aJCas);
       
-      int whiteSpaceIndex = line.indexOf(" ");
-      String id = line.substring(0, whiteSpaceIndex);
-      String string = line.substring(whiteSpaceIndex + 1);
+    int whiteSpaceIndex = line.indexOf(" ");
+    String id = line.substring(0, whiteSpaceIndex);
+    String string = line.substring(whiteSpaceIndex + 1);
       
-      annotation.setSentenceID(id);
-      annotation.setRawString(string);
-
-      // Ugly hack to keep track of order
-      annotation.setBegin(counter++);
-      annotation.setEnd(counter);
-      
-      annotation.addToIndexes();
-    }
+    annotation.setSentenceID(id);
+    annotation.setRawString(string);
+    annotation.setBegin(whiteSpaceIndex);
+    annotation.setEnd(line.length());
+    annotation.addToIndexes();
   }
-
 }

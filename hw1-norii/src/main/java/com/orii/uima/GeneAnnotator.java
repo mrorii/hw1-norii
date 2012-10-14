@@ -46,6 +46,8 @@ public class GeneAnnotator extends JCasAnnotator_ImplBase {
 
   @Override
   public void process(JCas aJCas) throws AnalysisEngineProcessException {
+    
+    aJCas.getDocumentText();
     FSIndex sentenceIndex = aJCas.getAnnotationIndex(Sentence.type);
 
     Iterator sentenceIter = sentenceIndex.iterator();
@@ -70,12 +72,8 @@ public class GeneAnnotator extends JCasAnnotator_ImplBase {
         // End offset is the number of NON-whitespace characters in the sentence
         // preceding the last character of the mention
         int countWhitespaceIn = StringUtils.countMatches(geneRawString, " ");
-        gene.setOffsetBegin(chunk.start() - countWhitespaceBefore);
-        gene.setOffsetEnd(chunk.end() - 1 - countWhitespaceBefore - countWhitespaceIn);
-        
-        // Ugly hack to get correct sort order
-        gene.setBegin(sentence.getBegin());
-        gene.setEnd(- chunk.end());
+        gene.setBegin(chunk.start() - countWhitespaceBefore);
+        gene.setEnd(chunk.end() - 1 - countWhitespaceBefore - countWhitespaceIn);
         
         gene.addToIndexes();
       }

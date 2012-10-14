@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Sat Oct 13 18:12:34 EDT 2012
+ * Updated by JCasGen Sat Oct 13 23:40:37 EDT 2012
  * XML source: /Users/orii/git/hw1-norii/hw1-norii/src/main/resources/TypeSystemDescriptor.xml
  * @generated */
 public class Gene extends Annotation {
@@ -96,42 +96,6 @@ public class Gene extends Annotation {
     if (Gene_Type.featOkTst && ((Gene_Type)jcasType).casFeat_rawString == null)
       jcasType.jcas.throwFeatMissing("rawString", "com.orii.uima.Gene");
     jcasType.ll_cas.ll_setStringValue(addr, ((Gene_Type)jcasType).casFeatCode_rawString, v);}    
-   
-    
-  //*--------------*
-  //* Feature: offsetBegin
-
-  /** getter for offsetBegin - gets Offset beginning location
-   * @generated */
-  public int getOffsetBegin() {
-    if (Gene_Type.featOkTst && ((Gene_Type)jcasType).casFeat_offsetBegin == null)
-      jcasType.jcas.throwFeatMissing("offsetBegin", "com.orii.uima.Gene");
-    return jcasType.ll_cas.ll_getIntValue(addr, ((Gene_Type)jcasType).casFeatCode_offsetBegin);}
-    
-  /** setter for offsetBegin - sets Offset beginning location 
-   * @generated */
-  public void setOffsetBegin(int v) {
-    if (Gene_Type.featOkTst && ((Gene_Type)jcasType).casFeat_offsetBegin == null)
-      jcasType.jcas.throwFeatMissing("offsetBegin", "com.orii.uima.Gene");
-    jcasType.ll_cas.ll_setIntValue(addr, ((Gene_Type)jcasType).casFeatCode_offsetBegin, v);}    
-   
-    
-  //*--------------*
-  //* Feature: offsetEnd
-
-  /** getter for offsetEnd - gets Offset ending location
-   * @generated */
-  public int getOffsetEnd() {
-    if (Gene_Type.featOkTst && ((Gene_Type)jcasType).casFeat_offsetEnd == null)
-      jcasType.jcas.throwFeatMissing("offsetEnd", "com.orii.uima.Gene");
-    return jcasType.ll_cas.ll_getIntValue(addr, ((Gene_Type)jcasType).casFeatCode_offsetEnd);}
-    
-  /** setter for offsetEnd - sets Offset ending location 
-   * @generated */
-  public void setOffsetEnd(int v) {
-    if (Gene_Type.featOkTst && ((Gene_Type)jcasType).casFeat_offsetEnd == null)
-      jcasType.jcas.throwFeatMissing("offsetEnd", "com.orii.uima.Gene");
-    jcasType.ll_cas.ll_setIntValue(addr, ((Gene_Type)jcasType).casFeatCode_offsetEnd, v);}    
   }
 
     

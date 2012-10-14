@@ -119,7 +119,7 @@ public class GeneTagPrinter extends CasConsumer_ImplBase implements CasObjectPro
       Gene gene = (Gene) geneIter.next();
       
       try {
-        fileWriter.write(gene.getSentenceID() + "|" + gene.getOffsetBegin() + " " + gene.getOffsetEnd() + "|" + gene.getRawString() + "\n");
+        fileWriter.write(gene.getSentenceID() + "|" + gene.getBegin() + " " + gene.getEnd() + "|" + gene.getRawString() + "\n");
         fileWriter.flush();
       } catch (IOException e) {
         throw new ResourceProcessException(e);
