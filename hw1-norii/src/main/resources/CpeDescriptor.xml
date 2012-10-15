@@ -22,7 +22,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="GeneTag Printer CAS Consumer">
             <descriptor>
-                <import location="GeneTagPrinter.xml"/>
+                <import location="GeneTagPrinterCasConsumer.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>

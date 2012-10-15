@@ -52,12 +52,12 @@ import org.apache.uima.util.ProcessTrace;
  * 
  */
 
-public class GeneTagPrinter extends CasConsumer_ImplBase implements CasObjectProcessor {
+public class GeneTagPrinterCasConsumer extends CasConsumer_ImplBase implements CasObjectProcessor {
   File outFile;
 
   FileWriter fileWriter;
 
-  public GeneTagPrinter() {
+  public GeneTagPrinterCasConsumer() {
   }
 
   /**

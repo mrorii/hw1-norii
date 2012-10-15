@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <casConsumerDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
-  <implementationName>com.orii.uima.GeneTagPrinter</implementationName>
+  <implementationName>com.orii.uima.GeneTagPrinterCasConsumer</implementationName>
   <processingResourceMetaData>
     <name>Annotation Printer</name>
-    <description>Prints annotations.</description>
+    <description>Prints gene annotations</description>
     <version>1.0</version>
-    <vendor>The Apache Software Foundation</vendor>
+    <vendor>Naoki Orii</vendor>
     <configurationParameters>
       <configurationParameter>
         <name>outputFile</name>
