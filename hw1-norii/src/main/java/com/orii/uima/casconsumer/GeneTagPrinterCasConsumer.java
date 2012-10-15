@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package com.orii.uima;
+package com.orii.uima.casconsumer;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -26,6 +26,7 @@ import java.util.Iterator;
 
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
+import org.apache.uima.cas.FSIndex;
 import org.apache.uima.collection.CasConsumer_ImplBase;
 import org.apache.uima.collection.base_cpm.CasObjectProcessor;
 import org.apache.uima.examples.SourceDocumentInformation;
@@ -35,6 +36,8 @@ import org.apache.uima.resource.ResourceConfigurationException;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceProcessException;
 import org.apache.uima.util.ProcessTrace;
+
+import com.orii.uima.Gene;
 
 /**
  * An example of CAS Consumer. <br>
@@ -51,12 +54,12 @@ import org.apache.uima.util.ProcessTrace;
  * 
  */
 
-public class AnnotationPrinter extends CasConsumer_ImplBase implements CasObjectProcessor {
+public class GeneTagPrinterCasConsumer extends CasConsumer_ImplBase implements CasObjectProcessor {
   File outFile;
 
   FileWriter fileWriter;
 
-  public AnnotationPrinter() {
+  public GeneTagPrinterCasConsumer() {
   }
 
   /**
@@ -111,36 +114,14 @@ public class AnnotationPrinter extends CasConsumer_ImplBase implements CasObject
       throw new ResourceProcessException(e);
     }
 
-    boolean titleP = false;
-    String docUri = null;
-    Iterator it = jcas.getAnnotationIndex(SourceDocumentInformation.type).iterator();
-    if (it.hasNext()) {
-      SourceDocumentInformation srcDocInfo = (SourceDocumentInformation) it.next();
-      docUri = srcDocInfo.getUri();
-    }
-
-    // iterate and print annotations
-    Iterator annotationIter = jcas.getAnnotationIndex().iterator();
-    while (annotationIter.hasNext()) {
-      Annotation annot = (Annotation) annotationIter.next();
-      if (titleP == false) {
-        try {
-          fileWriter.write("\n\n<++++NEW DOCUMENT++++>\n");
-          if (docUri != null)
-            fileWriter.write("DOCUMENT URI:" + docUri + "\n");
-          fileWriter.write("\n");
-        } catch (IOException e) {
-          throw new ResourceProcessException(e);
-        }
-        titleP = true;
-      }
-      // get the text that is enclosed within the annotation in the CAS
-      String aText = annot.getCoveredText();
-      aText = aText.replace('\n', ' ');
-      aText = aText.replace('\r', ' ');
-      // System.out.println( annot.getType().getName() + " "+aText);
+    FSIndex geneIndex = jcas.getAnnotationIndex(Gene.type);
+    Iterator geneIter = geneIndex.iterator();
+    
+    while (geneIter.hasNext()) {
+      Gene gene = (Gene) geneIter.next();
+      
       try {
-        fileWriter.write(annot.getType().getName() + " " + aText + "\n");
+        fileWriter.write(gene.getSentenceID() + "|" + gene.getBegin() + " " + gene.getEnd() + "|" + gene.getRawString() + "\n");
         fileWriter.flush();
       } catch (IOException e) {
         throw new ResourceProcessException(e);

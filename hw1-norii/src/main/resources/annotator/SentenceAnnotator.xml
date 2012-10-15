@@ -26,7 +26,7 @@
 <analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
 	<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
 	<primitive>true</primitive>
-	<annotatorImplementationName>com.orii.uima.SentenceAnnotator</annotatorImplementationName>
+	<annotatorImplementationName>com.orii.uima.annotator.SentenceAnnotator</annotatorImplementationName>
 
 	<analysisEngineMetaData>
 		<name>Sentence Annotator</name>
@@ -37,7 +37,7 @@
 		<!-- TypeSystem Definition -->
 		<typeSystemDescription>
 			<imports>
-				<import location="TypeSystemDescriptor.xml"/>
+				<import location="../TypeSystemDescriptor.xml"/>
 			</imports>
 		</typeSystemDescription>
 		

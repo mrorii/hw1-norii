@@ -1,4 +1,4 @@
-package com.orii.uima;
+package com.orii.uima.annotator;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +16,8 @@ import com.aliasi.chunk.Chunk;
 import com.aliasi.chunk.Chunker;
 import com.aliasi.chunk.Chunking;
 import com.aliasi.util.AbstractExternalizable;
+import com.orii.uima.Gene;
+import com.orii.uima.Sentence;
 
 public class GeneAnnotator extends JCasAnnotator_ImplBase {
   

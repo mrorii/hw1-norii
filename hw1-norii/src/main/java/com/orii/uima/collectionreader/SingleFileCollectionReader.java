@@ -1,4 +1,4 @@
-package com.orii.uima;
+package com.orii.uima.collectionreader;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import org.apache.uima.util.ProgressImpl;
  * @author Naoki Orii
  *
  */
-public class FileCollectionReader extends CollectionReader_ImplBase {
+public class SingleFileCollectionReader extends CollectionReader_ImplBase {
   /**
    * Name of configuration parameter that must be set to the path of the input file.
    */

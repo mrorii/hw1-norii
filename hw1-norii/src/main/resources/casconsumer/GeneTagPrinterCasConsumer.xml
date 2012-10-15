@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <casConsumerDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
-  <implementationName>org.apache.uima.examples.xmi.XmiWriterCasConsumer</implementationName>
+  <implementationName>com.orii.uima.casconsumer.GeneTagPrinterCasConsumer</implementationName>
   <processingResourceMetaData>
-    <name>Xmi Writer CAS Consumer</name>
-    <description>Writes the CAS to XMI format</description>
+    <name>Annotation Printer</name>
+    <description>Prints gene annotations</description>
     <version>1.0</version>
-    <vendor>The Apache Software Foundation</vendor>
+    <vendor>Naoki Orii</vendor>
     <configurationParameters>
       <configurationParameter>
-        <name>OutputDirectory</name>
-        <description>Directory where the XMI files will be written</description>
+        <name>outputFile</name>
+        <description>File to which annotations will be printed</description>
         <type>String</type>
         <multiValued>false</multiValued>
-        <mandatory>true</mandatory>
+        <mandatory>false</mandatory>
       </configurationParameter>
     </configurationParameters>
     <configurationParameterSettings>
       <nameValuePair>
-        <name>OutputDirectory</name>
+        <name>outputFile</name>
         <value>
-          <string>/tmp/uima-new</string>
+          <string>/tmp/uima-new/output.txt</string>
         </value>
       </nameValuePair>
     </configurationParameterSettings>

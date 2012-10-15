@@ -2,7 +2,7 @@
 <analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
   <primitive>true</primitive>
-  <annotatorImplementationName>com.orii.uima.GeneAnnotator</annotatorImplementationName>
+  <annotatorImplementationName>com.orii.uima.annotator.GeneAnnotator</annotatorImplementationName>
   <analysisEngineMetaData>
     <name>Gene Annotator</name>
     <description>A simple annotator that annotates genes</description>
@@ -27,7 +27,7 @@
     </configurationParameterSettings>
     <typeSystemDescription>
       <imports>
-        <import location="TypeSystemDescriptor.xml"/>
+        <import location="../TypeSystemDescriptor.xml"/>
       </imports>
     </typeSystemDescription>
     <typePriorities/>

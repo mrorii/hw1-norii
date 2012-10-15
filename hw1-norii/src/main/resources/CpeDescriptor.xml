@@ -3,14 +3,14 @@
     <collectionReader>
         <collectionIterator>
             <descriptor>
-                <import location="FileCollectionReader.xml"/>
+                <import location="collectionreader/SingleFileCollectionReader.xml"/>
             </descriptor>
         </collectionIterator>
     </collectionReader>
     <casProcessors casPoolSize="3" processingUnitThreadCount="1">
         <casProcessor deployment="integrated" name="Gene Annotator AE">
             <descriptor>
-                <import location="GeneAnnotatorAE.xml"/>
+                <import location="annotator/GeneAnnotatorAE.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -22,7 +22,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="GeneTag Printer CAS Consumer">
             <descriptor>
-                <import location="GeneTagPrinterCasConsumer.xml"/>
+                <import location="casconsumer/GeneTagPrinterCasConsumer.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>

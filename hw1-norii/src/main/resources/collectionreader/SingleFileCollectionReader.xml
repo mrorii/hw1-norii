@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <collectionReaderDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
-  <implementationName>com.orii.uima.FileCollectionReader</implementationName>
+  <implementationName>com.orii.uima.collectionreader.SingleFileCollectionReader</implementationName>
   <processingResourceMetaData>
-    <name>File Collection Reader</name>
-    <description>Reads a file from the filesystem.  This CollectionReader may be used
-          with or without a CAS Initializer.  If a CAS Initializer is supplied, it will
-          be passed an InputStream to the file and must populate the CAS from that
-          InputStream.  If no CAS Initializer is supplied, this CollectionReader will
-          read the file itself and set treat the entire contents of the file as the
-          document to be inserted into the CAS.</description>
+    <name>Single File Collection Reader</name>
+    <description>Reads a single file from the filesystem.  Generates a CAS for each line in the file.</description>
     <version>1.0</version>
     <vendor>Naoki Orii</vendor>
     <configurationParameters>

@@ -1,8 +1,10 @@
-package com.orii.uima;
+package com.orii.uima.annotator;
 
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
+
+import com.orii.uima.Sentence;
 
 public class SentenceAnnotator extends JCasAnnotator_ImplBase {
 
