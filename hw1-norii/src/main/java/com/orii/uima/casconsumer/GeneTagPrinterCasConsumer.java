@@ -29,9 +29,7 @@ import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIndex;
 import org.apache.uima.collection.CasConsumer_ImplBase;
 import org.apache.uima.collection.base_cpm.CasObjectProcessor;
-import org.apache.uima.examples.SourceDocumentInformation;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceConfigurationException;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceProcessException;
@@ -40,18 +38,10 @@ import org.apache.uima.util.ProcessTrace;
 import com.orii.uima.Gene;
 
 /**
- * An example of CAS Consumer. <br>
- * AnnotationPrinter prints to an output file all annotations in the CAS. <br>
- * Parameters needed by the AnnotationPrinter are
- * <ol>
- * <li> "outputFile" : file to which the output files should be written.</li>
- * </ol>
- * <br>
- * These parameters are set in the initialize method to the values specified in the descriptor file.
- * <br>
- * These may also be set by the application by using the setConfigParameterValue methods.
+ * A CAS consumer that prints out a file in GENETAG Annotation format.
+ * Assumption is that CAS will contain one or more {@link com.orii.uima.Gene} annotations.
  * 
- * 
+ * @author Naoki Orii
  */
 
 public class GeneTagPrinterCasConsumer extends CasConsumer_ImplBase implements CasObjectProcessor {
@@ -94,9 +84,7 @@ public class GeneTagPrinterCasConsumer extends CasConsumer_ImplBase implements C
   }
 
   /**
-   * Processes the CasContainer which was populated by the TextAnalysisEngines. <br>
-   * In this case, the CAS index is iterated over selected annotations and printed out into an
-   * output file
+   * Prints out the {@link com.orii.uima.Gene} annotations in required output format
    * 
    * @param aCAS
    *          CasContainer which has been populated by the TAEs
@@ -143,7 +131,7 @@ public class GeneTagPrinterCasConsumer extends CasConsumer_ImplBase implements C
    */
   public void batchProcessComplete(ProcessTrace aTrace) throws ResourceProcessException,
           IOException {
-    // nothing to do in this case as AnnotationPrinter doesnot do
+    // nothing to do in this case as AnnotationPrinter does not do
     // anything cumulatively
   }
 

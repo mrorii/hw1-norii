@@ -6,6 +6,11 @@ import org.apache.uima.jcas.JCas;
 
 import com.orii.uima.Sentence;
 
+/**
+ * Annotates {@link com.orii.uima.Sentence}s.
+ * 
+ * @author Naoki Orii
+ */
 public class SentenceAnnotator extends JCasAnnotator_ImplBase {
 
   @Override

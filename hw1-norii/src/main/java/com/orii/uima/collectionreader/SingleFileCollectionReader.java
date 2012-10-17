@@ -1,7 +1,6 @@
 package com.orii.uima.collectionreader;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
@@ -16,10 +15,10 @@ import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 
 /**
+ * A simple Collection Reader for reading in a single file.
+ * Generates a CAS for each line in the file.
  * 
- * A simple Collection Reader for reading in a single file
  * @author Naoki Orii
- *
  */
 public class SingleFileCollectionReader extends CollectionReader_ImplBase {
   /**
@@ -48,13 +47,11 @@ public class SingleFileCollectionReader extends CollectionReader_ImplBase {
       String text = FileUtils.file2String(mInputFile, mEncoding);
       mLines = text.split("\\r?\\n");
     } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+      throw new ResourceInitializationException(e);
     }
 
     mCurrentIndex = 0;
   }
-  
   
   @Override
   public void getNext(CAS aCAS) throws IOException, CollectionException {
@@ -83,8 +80,7 @@ public class SingleFileCollectionReader extends CollectionReader_ImplBase {
 
   @Override
   public void close() throws IOException {
-    // TODO Auto-generated method stub
-    
+    // do nothing
   }
 
   @Override

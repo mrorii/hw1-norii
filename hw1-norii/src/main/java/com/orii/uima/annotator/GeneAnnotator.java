@@ -19,6 +19,12 @@ import com.aliasi.util.AbstractExternalizable;
 import com.orii.uima.Gene;
 import com.orii.uima.Sentence;
 
+/**
+ * Annotates {@link com.orii.uima.Gene}s given {@link com.orii.uima.Sentence}s.
+ * Uses the LingPipe Chunker.
+ * 
+ * @author Naoki Orii
+ */
 public class GeneAnnotator extends JCasAnnotator_ImplBase {
   
   public static final String PARAM_MODELFILE = "ModelFile";
@@ -32,27 +38,24 @@ public class GeneAnnotator extends JCasAnnotator_ImplBase {
     File modelFile = new File(((String) getContext().getConfigParameterValue(PARAM_MODELFILE)).trim());
     
     if (!modelFile.exists()) {
-
+      throw new ResourceInitializationException();
     }
     
     try {
       chunker = (Chunker) AbstractExternalizable.readObject(modelFile);
     } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+      throw new ResourceInitializationException(e);
     } catch (ClassNotFoundException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+      throw new ResourceInitializationException(e);
     }
   }
 
   @Override
   public void process(JCas aJCas) throws AnalysisEngineProcessException {
-    
     aJCas.getDocumentText();
     FSIndex sentenceIndex = aJCas.getAnnotationIndex(Sentence.type);
-
     Iterator sentenceIter = sentenceIndex.iterator();
+    
     while (sentenceIter.hasNext()) {
       Sentence sentence = (Sentence) sentenceIter.next();
       String id = sentence.getSentenceID();
