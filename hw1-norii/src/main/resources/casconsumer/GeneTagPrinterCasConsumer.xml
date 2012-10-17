@@ -20,7 +20,7 @@
       <nameValuePair>
         <name>outputFile</name>
         <value>
-          <string>/tmp/uima-new/output.txt</string>
+          <string>hw1-norii.out</string>
         </value>
       </nameValuePair>
     </configurationParameterSettings>
