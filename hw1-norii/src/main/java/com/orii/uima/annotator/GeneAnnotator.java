@@ -10,6 +10,7 @@ import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIndex;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceAccessException;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import com.aliasi.chunk.Chunk;
@@ -35,18 +36,19 @@ public class GeneAnnotator extends JCasAnnotator_ImplBase {
   public void initialize(UimaContext aContext) throws ResourceInitializationException {
     super.initialize(aContext);
     
-    File modelFile = new File(((String) getContext().getConfigParameterValue(PARAM_MODELFILE)).trim());
-    
-    if (!modelFile.exists()) {
-      throw new ResourceInitializationException();
-    }
-    
+    File modelFile;
     try {
+      modelFile = new File(getContext().getResourceFilePath(PARAM_MODELFILE));
+      if (!modelFile.exists()) {
+        throw new ResourceInitializationException();
+      }
       chunker = (Chunker) AbstractExternalizable.readObject(modelFile);
+    } catch (ResourceAccessException e) {
+      e.printStackTrace();
     } catch (IOException e) {
-      throw new ResourceInitializationException(e);
+      e.printStackTrace();
     } catch (ClassNotFoundException e) {
-      throw new ResourceInitializationException(e);
+      e.printStackTrace();
     }
   }
 
